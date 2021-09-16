@@ -2,16 +2,18 @@ package com.lacouf.reacttodo.controller;
 
 import com.lacouf.reacttodo.model.Todo;
 import com.lacouf.reacttodo.service.TodoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/todos")
 public class ReactTodoController {
+    Logger logger = LoggerFactory.getLogger(ReactTodoController.class);
 
     private final TodoService todoService;
 
@@ -20,7 +22,18 @@ public class ReactTodoController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Todo> getAllTodos() {
+        logger.info("getAllTodos");
         return todoService.getAllTodos();
+    }
+
+    @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
+        logger.info("post - createTodo " + newTodo);
+        return todoService.saveTodo(newTodo)
+                .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 }

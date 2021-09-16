@@ -1,22 +1,20 @@
 package com.lacouf.reacttodo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("todo")
+@ToString
 @Builder
+@Document("todo")
 public class Todo {
     @Id
     private String id;
 
     private String text;
-    private String date;
+    private String day;
     private boolean reminder;
 }

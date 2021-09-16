@@ -2,6 +2,7 @@ package com.lacouf.reacttodo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lacouf.reacttodo.model.Todo;
+import com.lacouf.reacttodo.repos.TodoRepository;
 import com.lacouf.reacttodo.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @WebMvcTest(ReactTodoController.class)
 public class ReactTodoControllerTest {
@@ -27,6 +30,9 @@ public class ReactTodoControllerTest {
 
     @MockBean
     private TodoService todoService;
+
+    @MockBean
+    private TodoRepository repository;
 
     private Todo expected;
 
@@ -47,24 +53,45 @@ public class ReactTodoControllerTest {
         assertThat(actuals.size()).isEqualTo(3);
     }
 
+    @Test
+    public void saveTodoTest() throws Exception {
+        // Arrange
+        expected = Todo.builder()
+                        .text("un todo")
+                        .day("hier")
+                        .reminder(false)
+                        .build();
+        when(todoService.saveTodo(expected)).thenReturn(Optional.of(expected));
+
+        // Act
+        MvcResult result = mockMvc.perform(post("/api/employers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(expected))).andReturn();
+
+        // Assert
+        var actualTodo = new ObjectMapper().readValue(result.getResponse().getContentAsString(), Todo.class);
+        assertThat(result.getResponse().getStatus()).isEqualTo( HttpStatus.CREATED.value());
+        assertThat(expected).isEqualTo(actualTodo);
+    }
+
     private List<Todo> getTodoList() {
         List<Todo> todoList = new ArrayList<>();
         todoList.add(Todo.builder()
                 .id("1")
                 .text("todo1")
-                .date("Aujourd'hui")
+                .day("Aujourd'hui")
                 .reminder(false)
                 .build());
         todoList.add(Todo.builder()
                 .id("2")
                 .text("todo2")
-                .date("Hier")
+                .day("Hier")
                 .reminder(true)
                 .build());
         todoList.add(Todo.builder()
                 .id("3")
                 .text("todo3")
-                .date("Demain")
+                .day("Demain")
                 .reminder(false)
                 .build());
         return todoList;
