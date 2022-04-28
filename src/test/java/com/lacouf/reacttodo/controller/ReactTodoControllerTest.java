@@ -2,7 +2,7 @@ package com.lacouf.reacttodo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lacouf.reacttodo.model.Todo;
-import com.lacouf.reacttodo.repos.TodoRepository;
+import com.lacouf.reacttodo.repos.TodoRepositoryJpa;
 import com.lacouf.reacttodo.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ReactTodoControllerTest {
     private TodoService todoService;
 
     @MockBean
-    private TodoRepository repository;
+    private TodoRepositoryJpa repository;
 
     private Todo expected;
 

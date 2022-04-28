@@ -2,6 +2,7 @@ package com.lacouf.reacttodo.controller;
 
 import com.lacouf.reacttodo.model.Todo;
 import com.lacouf.reacttodo.service.TodoService;
+import com.lacouf.reacttodo.service.TodoService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -28,10 +29,28 @@ public class ReactTodoController {
         return todoService.getAllTodos();
     }
 
+    @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Todo> getTodo(@PathVariable Long id) {
+        logger.info("getAllTodos");
+        return todoService.findById(id)
+                .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
+
     @PostMapping
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
         logger.info("post - createTodo " + newTodo);
+        return todoService.saveTodo(newTodo)
+                .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
+
+    @PutMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Todo> updateTodo(@RequestBody Todo newTodo, @PathVariable Long id) {
+        logger.info("update - createTodo " + newTodo);
         return todoService.saveTodo(newTodo)
                 .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
                 .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());

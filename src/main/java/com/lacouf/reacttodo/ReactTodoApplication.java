@@ -1,20 +1,17 @@
 package com.lacouf.reacttodo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.lacouf.reacttodo.model.Todo;
-import com.lacouf.reacttodo.repos.TodoRepository;
+import com.lacouf.reacttodo.repos.TodoRepositoryJpa;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @SpringBootApplication
 public class ReactTodoApplication implements CommandLineRunner {
 
-    private final TodoRepository repository;
+    private final TodoRepositoryJpa repository;
 
-    public ReactTodoApplication(TodoRepository repository) {
+    public ReactTodoApplication(TodoRepositoryJpa repository) {
         this.repository = repository;
     }
     public static void main(String[] args) {
