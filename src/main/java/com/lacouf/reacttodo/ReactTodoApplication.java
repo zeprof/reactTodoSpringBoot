@@ -1,29 +1,23 @@
 package com.lacouf.reacttodo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.lacouf.reacttodo.model.Todo;
 import com.lacouf.reacttodo.repos.TodoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @SpringBootApplication
 public class ReactTodoApplication implements CommandLineRunner {
-
     private final TodoRepository repository;
-
     public ReactTodoApplication(TodoRepository repository) {
         this.repository = repository;
     }
     public static void main(String[] args) {
         SpringApplication.run(ReactTodoApplication.class, args);
     }
-
-
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args)  {
         //repository.deleteAll();
 
         // save a couple of customers

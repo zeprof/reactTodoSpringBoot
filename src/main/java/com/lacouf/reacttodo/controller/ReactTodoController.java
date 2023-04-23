@@ -33,7 +33,7 @@ public class ReactTodoController {
     public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
         logger.info("post - createTodo " + newTodo);
         return todoService.saveTodo(newTodo)
-                .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
-                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+                .map(todo -> ResponseEntity.status(HttpStatus.OK).body(todo))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

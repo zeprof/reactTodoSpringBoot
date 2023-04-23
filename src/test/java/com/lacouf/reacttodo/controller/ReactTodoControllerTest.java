@@ -34,8 +34,6 @@ public class ReactTodoControllerTest {
     @MockBean
     private TodoRepository repository;
 
-    private Todo expected;
-
     @Test
     public void getAllTodosTest() throws Exception {
         // Arrange
@@ -56,15 +54,15 @@ public class ReactTodoControllerTest {
     @Test
     public void saveTodoTest() throws Exception {
         // Arrange
-        expected = Todo.builder()
-                        .text("un todo")
-                        .day("hier")
-                        .reminder(false)
-                        .build();
+        Todo expected = Todo.builder()
+                .text("un todo")
+                .day("hier")
+                .reminder(false)
+                .build();
         when(todoService.saveTodo(expected)).thenReturn(Optional.of(expected));
 
         // Act
-        MvcResult result = mockMvc.perform(post("/api/employers")
+        MvcResult result = mockMvc.perform(post("/todos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(expected))).andReturn();
 
@@ -77,19 +75,19 @@ public class ReactTodoControllerTest {
     private List<Todo> getTodoList() {
         List<Todo> todoList = new ArrayList<>();
         todoList.add(Todo.builder()
-                .id("1")
+                .id(1l)
                 .text("todo1")
                 .day("Aujourd'hui")
                 .reminder(false)
                 .build());
         todoList.add(Todo.builder()
-                .id("2")
+                .id(2l)
                 .text("todo2")
                 .day("Hier")
                 .reminder(true)
                 .build());
         todoList.add(Todo.builder()
-                .id("3")
+                .id(3l)
                 .text("todo3")
                 .day("Demain")
                 .reminder(false)

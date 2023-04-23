@@ -1,18 +1,22 @@
 package com.lacouf.reacttodo.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Builder
-@Document("todo")
+@Entity
 public class Todo {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String text;
     private String day;
