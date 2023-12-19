@@ -1,7 +1,7 @@
 package com.lacouf.reacttodo.service;
 
 import com.lacouf.reacttodo.model.Todo;
-import com.lacouf.reacttodo.repos.TodoRepository;
+import com.lacouf.reacttodo.repos.TodoRepositoryJpa;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TodoServiceTest {
 
     @Mock
-    private TodoRepository repository;
+    private TodoRepositoryJpa repository;
 
     @InjectMocks
     private TodoService service;

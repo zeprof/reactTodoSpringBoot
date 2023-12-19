@@ -1,7 +1,7 @@
 package com.lacouf.reacttodo.service;
 
 import com.lacouf.reacttodo.model.Todo;
-import com.lacouf.reacttodo.repos.TodoRepository;
+import com.lacouf.reacttodo.repos.TodoRepositoryJpa;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.Optional;
 @Service
 public class TodoService {
 
-    public TodoRepository repository;
+    public TodoRepositoryJpa repository;
 
-    public TodoService(TodoRepository repository) {
+    public TodoService(TodoRepositoryJpa repository) {
         this.repository = repository;
     }
 
@@ -24,7 +24,7 @@ public class TodoService {
         return Optional.of(repository.save(todo));
     }
 
-    public void deleteTodo(Todo todo) {
-        repository.delete(todo);
+    public Optional<Todo> findById(Long id) {
+        return repository.findById(id);
     }
 }

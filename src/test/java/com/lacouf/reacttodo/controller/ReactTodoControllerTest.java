@@ -2,7 +2,7 @@ package com.lacouf.reacttodo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lacouf.reacttodo.model.Todo;
-import com.lacouf.reacttodo.repos.TodoRepository;
+import com.lacouf.reacttodo.repos.TodoRepositoryJpa;
 import com.lacouf.reacttodo.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ReactTodoControllerTest {
     private TodoService todoService;
 
     @MockBean
-    private TodoRepository repository;
+    private TodoRepositoryJpa repository;
 
     @Test
     public void getAllTodosTest() throws Exception {
@@ -55,8 +55,8 @@ public class ReactTodoControllerTest {
     public void saveTodoTest() throws Exception {
         // Arrange
         Todo expected = Todo.builder()
-                .text("un todo")
-                .dayOfTodo("hier")
+                .description("un todo")
+                .zedate("hier")
                 .reminder(false)
                 .build();
         when(todoService.saveTodo(expected)).thenReturn(Optional.of(expected));
@@ -76,20 +76,20 @@ public class ReactTodoControllerTest {
         List<Todo> todoList = new ArrayList<>();
         todoList.add(Todo.builder()
                 .id(1l)
-                .text("todo1")
-                .dayOfTodo("Aujourd'hui")
+                .description("todo1")
+                .zedate("Aujourd'hui")
                 .reminder(false)
                 .build());
         todoList.add(Todo.builder()
                 .id(2l)
-                .text("todo2")
-                .dayOfTodo("Hier")
+                .zedate("todo2")
+                .description("Hier")
                 .reminder(true)
                 .build());
         todoList.add(Todo.builder()
                 .id(3l)
-                .text("todo3")
-                .dayOfTodo("Demain")
+                .description("todo3")
+                .zedate("Demain")
                 .reminder(false)
                 .build());
         return todoList;

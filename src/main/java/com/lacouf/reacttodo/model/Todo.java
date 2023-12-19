@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +17,15 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String text;
-    private String dayOfTodo;
+    private String description;
+    private String zedate;
     private boolean reminder;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

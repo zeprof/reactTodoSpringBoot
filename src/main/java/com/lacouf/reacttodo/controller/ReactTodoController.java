@@ -28,6 +28,15 @@ public class ReactTodoController {
         return ResponseEntity.ok().body(todoService.getAllTodos());
     }
 
+    @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Todo> getTodo(@PathVariable Long id) {
+        logger.info("getAllTodos");
+        return todoService.findById(id)
+                .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
+
     @PostMapping
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
@@ -35,5 +44,14 @@ public class ReactTodoController {
         return todoService.saveTodo(newTodo)
                 .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @PutMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Todo> updateTodo(@RequestBody Todo newTodo, @PathVariable Long id) {
+        logger.info("update - createTodo " + newTodo);
+        return todoService.saveTodo(newTodo)
+                .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 }
