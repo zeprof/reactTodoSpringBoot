@@ -33,27 +33,27 @@ public class TodoServiceTest {
 
         // Assert
         assertThat(allTodos.size()).isEqualTo(3);
-        assertThat(allTodos.get(0).getText()).isEqualTo("todo1");
+        assertThat(allTodos.get(0).getDescription()).isEqualTo("todo1");
     }
 
     private List<Todo> getListOfTodos() {
         List<Todo> todoList = new ArrayList<>();
         todoList.add(Todo.builder()
-                .id(1l)
-                .text("todo1")
-                .dayOfTodo("Aujourd'hui")
+                .id(1L)
+                .description("todo1")
+                .zedate("Aujourd'hui")
                 .reminder(false)
                 .build());
         todoList.add(Todo.builder()
-                .id(1l)
-                .text("todo2")
-                .dayOfTodo("Hier")
+                .id(1L)
+                .description("todo2")
+                .zedate("Hier")
                 .reminder(true)
                 .build());
         todoList.add(Todo.builder()
-                .id(3l)
-                .text("todo3")
-                .dayOfTodo("Demain")
+                .id(3L)
+                .description("todo3")
+                .zedate("Demain")
                 .reminder(false)
                 .build());
         return todoList;
