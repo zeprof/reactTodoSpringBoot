@@ -23,9 +23,9 @@ public class ReactTodoController {
 
     @GetMapping
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Todo> getAllTodos() {
+    public ResponseEntity<List<Todo>> getAllTodos() {
         logger.info("getAllTodos");
-        return todoService.getAllTodos();
+        return ResponseEntity.ok().body(todoService.getAllTodos());
     }
 
     @PostMapping
@@ -33,7 +33,7 @@ public class ReactTodoController {
     public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
         logger.info("post - createTodo " + newTodo);
         return todoService.saveTodo(newTodo)
-                .map(todo -> ResponseEntity.status(HttpStatus.OK).body(todo))
+                .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

@@ -39,21 +39,21 @@ public class TodoServiceTest {
     private List<Todo> getListOfTodos() {
         List<Todo> todoList = new ArrayList<>();
         todoList.add(Todo.builder()
-                .id("1")
+                .id(1l)
                 .text("todo1")
-                .day("Aujourd'hui")
+                .dayOfTodo("Aujourd'hui")
                 .reminder(false)
                 .build());
         todoList.add(Todo.builder()
-                .id("2")
+                .id(1l)
                 .text("todo2")
-                .day("Hier")
+                .dayOfTodo("Hier")
                 .reminder(true)
                 .build());
         todoList.add(Todo.builder()
-                .id("3")
+                .id(3l)
                 .text("todo3")
-                .day("Demain")
+                .dayOfTodo("Demain")
                 .reminder(false)
                 .build());
         return todoList;

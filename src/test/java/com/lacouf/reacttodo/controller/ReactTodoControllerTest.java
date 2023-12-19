@@ -56,7 +56,7 @@ public class ReactTodoControllerTest {
         // Arrange
         Todo expected = Todo.builder()
                 .text("un todo")
-                .day("hier")
+                .dayOfTodo("hier")
                 .reminder(false)
                 .build();
         when(todoService.saveTodo(expected)).thenReturn(Optional.of(expected));
@@ -77,19 +77,19 @@ public class ReactTodoControllerTest {
         todoList.add(Todo.builder()
                 .id(1l)
                 .text("todo1")
-                .day("Aujourd'hui")
+                .dayOfTodo("Aujourd'hui")
                 .reminder(false)
                 .build());
         todoList.add(Todo.builder()
                 .id(2l)
                 .text("todo2")
-                .day("Hier")
+                .dayOfTodo("Hier")
                 .reminder(true)
                 .build());
         todoList.add(Todo.builder()
                 .id(3l)
                 .text("todo3")
-                .day("Demain")
+                .dayOfTodo("Demain")
                 .reminder(false)
                 .build());
         return todoList;

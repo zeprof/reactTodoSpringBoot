@@ -23,4 +23,8 @@ public class TodoService {
     public Optional<Todo> saveTodo(Todo todo) {
         return Optional.of(repository.save(todo));
     }
+
+    public void deleteTodo(Todo todo) {
+        repository.delete(todo);
+    }
 }
