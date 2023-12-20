@@ -54,4 +54,12 @@ public class ReactTodoController {
                 .map(todo -> ResponseEntity.status(HttpStatus.CREATED).body(todo))
                 .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
+
+    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Todo> deleteTodo(@PathVariable Long id) {
+        logger.info("delete - createTodo " + id);
+        todoService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
